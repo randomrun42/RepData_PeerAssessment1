@@ -18,8 +18,9 @@ data$date <- as.Date(data$date, "%Y-%m-%d")
 ## What is mean total number of steps taken per day?
 
 ```r
-hist(tapply(data$steps, data$date, mean, na.rm=TRUE),
-     xlab = "Steps per Day", main = "Histogram of Steps per Day")
+hist(tapply(data$steps, data$date, sum, na.rm=TRUE),
+     xlab = "Total Steps per Day", main = "Histogram of Total Steps per Day",
+     breaks = 16)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
@@ -62,15 +63,28 @@ data$interval[which.max(data$intervalmean)]
 
 ## Imputing missing values
 
+Number of missing values (coded as NA):
+
+```r
+length(is.na(data$steps))
+```
+
+```
+## [1] 17568
+```
+
+Missing values will be replaced by the mean for that 5-minute interval:
+
 ```r
 data$stepsimputed[is.na(data$steps)] <- data$intervalmean[is.na(data$steps)]
 data$stepsimputed[!is.na(data$steps)] <- data$steps[!is.na(data$steps)]
 
-hist(stepsperdayimputed <- tapply(data$stepsimputed, data$date, mean),
-     xlab = "Steps per Day", main = "Histogram of Steps per Day")
+hist(stepsperdayimputed <- tapply(data$stepsimputed, data$date, sum),
+     xlab = "Total Steps per Day", main = "Histogram of Total Steps per Day",
+     breaks = 16)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 ```r
 mean(data$stepsimputed)
@@ -112,4 +126,4 @@ xyplot(daytypeintervalmean ~ interval | daytype,
        layout = c(1, 2), type = "l", ylab = "Number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
