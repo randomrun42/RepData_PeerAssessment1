@@ -16,11 +16,12 @@ data$date <- as.Date(data$date, "%Y-%m-%d")
 
 ## What is mean total number of steps taken per day?
 ```{r}
-hist(tapply(data$steps, data$date, sum, na.rm=TRUE),
+stepsperday <- tapply(data$steps, data$date, sum, na.rm=TRUE)
+hist(stepsperday,
      xlab = "Total Steps per Day", main = "Histogram of Total Steps per Day",
      breaks = 16)
-mean(data$steps, na.rm=TRUE)
-median(data$steps, na.rm=TRUE)
+mean(stepsperday)
+median(stepsperday)
 ```
 
 
@@ -45,11 +46,12 @@ Missing values will be replaced by the mean for that 5-minute interval:
 data$stepsimputed[is.na(data$steps)] <- data$intervalmean[is.na(data$steps)]
 data$stepsimputed[!is.na(data$steps)] <- data$steps[!is.na(data$steps)]
 
-hist(stepsperdayimputed <- tapply(data$stepsimputed, data$date, sum),
+stepsperdayimputed <- tapply(data$stepsimputed, data$date, sum)
+hist(stepsperdayimputed,
      xlab = "Total Steps per Day", main = "Histogram of Total Steps per Day",
      breaks = 16)
-mean(data$stepsimputed)
-median(data$stepsimputed)
+mean(stepsperdayimputed)
+median(stepsperdayimputed)
 ```
 
 

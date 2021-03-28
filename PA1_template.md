@@ -18,7 +18,8 @@ data$date <- as.Date(data$date, "%Y-%m-%d")
 ## What is mean total number of steps taken per day?
 
 ```r
-hist(tapply(data$steps, data$date, sum, na.rm=TRUE),
+stepsperday <- tapply(data$steps, data$date, sum, na.rm=TRUE)
+hist(stepsperday,
      xlab = "Total Steps per Day", main = "Histogram of Total Steps per Day",
      breaks = 16)
 ```
@@ -26,19 +27,19 @@ hist(tapply(data$steps, data$date, sum, na.rm=TRUE),
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 ```r
-mean(data$steps, na.rm=TRUE)
+mean(stepsperday)
 ```
 
 ```
-## [1] 37.3826
+## [1] 9354.23
 ```
 
 ```r
-median(data$steps, na.rm=TRUE)
+median(stepsperday)
 ```
 
 ```
-## [1] 0
+## [1] 10395
 ```
 
 
@@ -79,7 +80,8 @@ Missing values will be replaced by the mean for that 5-minute interval:
 data$stepsimputed[is.na(data$steps)] <- data$intervalmean[is.na(data$steps)]
 data$stepsimputed[!is.na(data$steps)] <- data$steps[!is.na(data$steps)]
 
-hist(stepsperdayimputed <- tapply(data$stepsimputed, data$date, sum),
+stepsperdayimputed <- tapply(data$stepsimputed, data$date, sum)
+hist(stepsperdayimputed,
      xlab = "Total Steps per Day", main = "Histogram of Total Steps per Day",
      breaks = 16)
 ```
@@ -87,19 +89,19 @@ hist(stepsperdayimputed <- tapply(data$stepsimputed, data$date, sum),
 ![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 ```r
-mean(data$stepsimputed)
+mean(stepsperdayimputed)
 ```
 
 ```
-## [1] 37.3826
+## [1] 10766.19
 ```
 
 ```r
-median(data$stepsimputed)
+median(stepsperdayimputed)
 ```
 
 ```
-## [1] 0
+## [1] 10766.19
 ```
 
 
