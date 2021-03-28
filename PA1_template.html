@@ -198,8 +198,8 @@ with(data[order(data$interval),], plot(interval, intervalmean, type = &quot;l&qu
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
 <p>Number of missing values (coded as NA):</p>
-<pre class="r"><code>length(is.na(data$steps))</code></pre>
-<pre><code>## [1] 17568</code></pre>
+<pre class="r"><code>sum(is.na(data$steps))</code></pre>
+<pre><code>## [1] 2304</code></pre>
 <p>Missing values will be replaced by the mean for that 5-minute interval:</p>
 <pre class="r"><code>data$stepsimputed[is.na(data$steps)] &lt;- data$intervalmean[is.na(data$steps)]
 data$stepsimputed[!is.na(data$steps)] &lt;- data$steps[!is.na(data$steps)]

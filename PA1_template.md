@@ -67,11 +67,11 @@ data$interval[which.max(data$intervalmean)]
 Number of missing values (coded as NA):
 
 ```r
-length(is.na(data$steps))
+sum(is.na(data$steps))
 ```
 
 ```
-## [1] 17568
+## [1] 2304
 ```
 
 Missing values will be replaced by the mean for that 5-minute interval:
